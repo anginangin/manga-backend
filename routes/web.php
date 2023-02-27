@@ -17,7 +17,7 @@ use App\Http\Controllers\RecommendController;
 use App\Http\Controllers\SettingWebController;
 use App\Http\Controllers\ThemeColorController;
 use App\Http\Controllers\BlacklistMangaController;
-
+use App\Http\Controllers\PageController;
 
 Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::post('authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
@@ -40,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('manga', MangaController::class);
     Route::get('manga/chapter/delete/{id}', [MangaController::class, 'delete_chapter'])->name('delete_chapter');
     Route::put('manga/blacklist/{id}', [MangaController::class, 'blacklist'])->name('blacklist');
-    
+
     Route::resource('blacklist', BlacklistMangaController::class);
     Route::put('manga/restore/{id}', [BlacklistMangaController::class, 'restore'])->name('restore');
 
@@ -61,17 +61,18 @@ Route::middleware(['auth'])->group(function () {
     Route::post('setting-web/store', [SettingWebController::class, 'store'])->name('store-setting-web');
     Route::get('setting-web/edit/{id}', [SettingWebController::class, 'edit'])->name('edit-setting-web');
     Route::put('setting-web/update/{id}', [SettingWebController::class, 'update'])->name('update-setting-web');
-    
+
     Route::resource('theme-color', ThemeColorController::class);
     Route::put('theme-color/update/{id}', [ThemeColorController::class, 'updateTheme'])->name('update-theme');
 
     Route::resource('adds', AddsController::class);
 
     Route::resource('banners', BannerController::class);
+    Route::resource('pages', PageController::class);
 
     Route::resource('sliders', SliderController::class);
     Route::put('update-title-slider/{id}', [SliderController::class, 'update_title'])->name('update-title-slider');
-    
+
     Route::resource('rilisan-terbaru', RilisanTerbaru::class);
 
     Route::resource('slider-trending', TrendingController::class);
@@ -79,7 +80,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('slider-recommend', RecommendController::class);
     Route::put('update-title-recommend/{id}', [RecommendController::class, 'update_title'])->name('update-title-recommend');
-    
+
     Route::resource('manga-populer', PopulerController::class);
     Route::put('update-title-mv/{id}', [PopulerController::class, 'update_title'])->name('update-title-mv');
 });

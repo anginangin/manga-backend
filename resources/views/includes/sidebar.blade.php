@@ -58,6 +58,14 @@
                         <span class="pcoded-mtext">SEO-Artikel</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('pages.index') }}" class="nav-link ">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-globe"></i>
+                        </span>
+                        <span class="pcoded-mtext">Pages</span>
+                    </a>
+                </li>
                 <li class="nav-item pcoded-menu-caption">
                     <label>Pengaturan Homepage FE</label>
                 </li>
