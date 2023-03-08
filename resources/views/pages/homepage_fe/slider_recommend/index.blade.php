@@ -28,6 +28,15 @@ Slider Rekomendasi
                                 <label>Judul</label>
                                 <input type="text" class="form-control form-control-sm" name="judul" value="{{ $title->rekomendasi }}">
                             </div>
+                            <div class="form-group">
+                                <label>Is Active</label>
+                                <select name="is_rekomendasi" id="is_rekomendasi" class="form-control form-control-sm">
+                                    <option value="0" {{ $title->is_rekomendasi == 0 ? 'selected' : '' }}>No
+                                    </option>
+                                    <option value="1" {{ $title->is_rekomendasi == 1 ? 'selected' : '' }}>Yes
+                                    </option>
+                                </select>
+                            </div>
                             <button type="submit" class="btn btn-block btn-primary">
                                 <i class="feather mr-2 icon-check-circle"></i>
                                 Simpan Perubahan
@@ -152,7 +161,7 @@ Slider Rekomendasi
                                                     </div>
                                                 </div>
                                             </div>
-            
+
                                             <!-- Modal Hapus -->
                                             <div class="modal fade" id="hapus_{{ $recommend->id }}" tabindex="-1"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">

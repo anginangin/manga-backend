@@ -17,7 +17,7 @@ class RecommendController extends Controller
     public function index()
     {
         $recommends = Recommend::with('manga')->orderBy('urutan')->get();
-        $title = Title::select('id', 'rekomendasi')->first();
+        $title = Title::select('id', 'rekomendasi', 'is_rekomendasi')->first();
         $manga = Manga::all();
         return view('pages.homepage_fe.slider_recommend.index', compact('recommends', 'title', 'manga'));
     }
@@ -99,9 +99,11 @@ class RecommendController extends Controller
         return redirect()->back()->with('message', 'Berhasil dihapus');
     }
 
-    public function update_title(Request $request, $id){
+    public function update_title(Request $request, $id)
+    {
         Title::where('id', $id)->update([
-            'rekomendasi' => $request->judul
+            'rekomendasi' => $request->judul,
+            'is_rekomendasi' => $request->is_rekomendasi
         ]);
         return redirect()->back()->with('title', 'Berhasil diubah');
     }

@@ -29,6 +29,15 @@ Slider
                                 <input type="text" class="form-control form-control-sm" name="judul"
                                     value="{{ $title->atas_rilisan_terbaru }}">
                             </div>
+                            <div class="form-group">
+                                <label>Is Active</label>
+                                <select name="is_most_rating" id="is_most_rating" class="form-control form-control-sm">
+                                    <option value="0" {{ $title->is_most_rating == 0 ? 'selected' : '' }}>No
+                                    </option>
+                                    <option value="1" {{ $title->is_most_rating == 1 ? 'selected' : '' }}>Yes
+                                    </option>
+                                </select>
+                            </div>
                             <button type="submit" class="btn btn-block btn-primary">
                                 <i class="feather mr-2 icon-check-circle"></i>
                                 Simpan Perubahan

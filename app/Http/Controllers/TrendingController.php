@@ -17,7 +17,7 @@ class TrendingController extends Controller
     public function index()
     {
         $trendings = Trending::with('manga')->orderBy('urutan')->get();
-        $title = Title::select('id', 'slider_trending')->first();
+        $title = Title::select('id', 'slider_trending','is_most_view')->first();
         $manga = Manga::all();
         return view('pages.homepage_fe.slider_trending.index', compact('trendings', 'title', 'manga'));
     }
@@ -99,9 +99,11 @@ class TrendingController extends Controller
         return redirect()->back()->with('message', 'Berhasil dihapus');
     }
 
-    public function update_title(Request $request, $id){
+    public function update_title(Request $request, $id)
+    {
         Title::where('id', $id)->update([
-            'slider_trending' => $request->judul
+            'slider_trending' => $request->judul,
+            'is_most_view' => $request->is_most_view,
         ]);
         return redirect()->back()->with('title', 'Berhasil diubah');
     }

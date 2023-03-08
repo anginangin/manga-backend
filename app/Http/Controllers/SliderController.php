@@ -17,7 +17,7 @@ class SliderController extends Controller
     public function index()
     {
         $slider = Slider::with('manga')->orderBy('urutan')->get();
-        $title = Title::select('id', 'atas_rilisan_terbaru')->first();
+        $title = Title::select('id', 'atas_rilisan_terbaru', 'is_most_rating')->first();
         $manga = Manga::all();
         return view('pages.slider.index', compact('slider', 'manga', 'title'));
     }
@@ -102,7 +102,8 @@ class SliderController extends Controller
     public function update_title(Request $request, $id)
     {
         Title::where('id', $id)->update([
-            'atas_rilisan_terbaru' => $request->judul
+            'atas_rilisan_terbaru' => $request->judul,
+            'is_most_rating' => $request->is_most_rating
         ]);
         return redirect()->back()->with('title', 'Berhasil diubah');
     }
