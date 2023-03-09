@@ -15,21 +15,26 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="floating-label font-weight-bold">Script Iklan</label>
-                                <textarea name="script" class="form-control form-control-sm" cols="30"
-                                    rows="10">{{ $data->script }}</textarea>
+                                <textarea name="script" class="form-control form-control-sm" cols="30" rows="10">{{ $data->script }}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="floating-label font-weight-bold">Posisi</label>
+                                <select class="form-control form-control-sm" name="posisi">
+                                    <option value="HEADER" {{ $data->posisi == 'HEADER' ? 'selected' : '' }}>Header
+                                    </option>
+                                    <option value="BODY" {{ $data->posisi == 'Body' ? 'selected' : '' }}>Body</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="floating-label font-weight-bold">Status</label>
                                 <select class="form-control form-control-sm" name="status">
-                                    @if ($data->status == 0)
-                                    <option value="{{ $data->status }}" selected disabled>Aktif</option>
-                                    @else
-                                    <option value="{{ $data->status }}" selected disabled>Tidak Aktif</option>
-                                    @endif
-                                    <option value="0">Aktif</option>
-                                    <option value="1">Tidak Aktif</option>
+
+                                    <option value="0" {{ $data->status == 0 ? 'selected' : '' }}>Aktif</option>
+                                    <option value="1" {{ $data->status == 1 ? 'selected' : '' }}>Tidak Aktif</option>
                                 </select>
                             </div>
                         </div>

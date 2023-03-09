@@ -23,6 +23,15 @@ Iklan (Ads)
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
+                                        <label class="floating-label font-weight-bold">Posisi</label>
+                                        <select class="form-control form-control-sm" name="posisi">
+                                            <option value="HEADER">Header</option>
+                                            <option value="BODY">Body</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
                                         <label class="floating-label font-weight-bold">Status</label>
                                         <select class="form-control form-control-sm" name="status">
                                             <option value="0">Aktif</option>
@@ -57,6 +66,7 @@ Iklan (Ads)
                                     <tr>
                                         <th>#</th>
                                         <th>Iklan (Ads)</th>
+                                        <th>Posisi</th>
                                         <th class="text-center">Status</th>
                                         <th></th>
                                     </tr>
@@ -68,8 +78,9 @@ Iklan (Ads)
                                         <td>
                                             {{ Str::limit($data->script, 50) }}
                                         </td>
+                                        <td>{{ $data->posisi }}</td>
                                         <td class="text-center">
-                                            @if ($data->status == 0)                                                
+                                            @if ($data->status == 0)
                                             <span class="badge badge-pill badge-primary">Aktif</span>
                                             @else
                                             <span class="badge badge-pill badge-primary">Tidak Aktif</span>
@@ -82,10 +93,10 @@ Iklan (Ads)
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item" href="#!" data-toggle="modal" data-target="#edit_{{ $data->id }}">
                                                         Ubah
-                                                    </a>    
+                                                    </a>
                                                     <a class="dropdown-item" href="#!" data-toggle="modal" data-target="#hapus_{{ $data->id }}">
                                                         Hapus
-                                                    </a>    
+                                                    </a>
                                                 </div>
                                             </div>
                                             <!-- Modal Edit -->

@@ -38,7 +38,8 @@ class AddsController extends Controller
     {
         Adds::create([
             'script' => $request->script,
-            'status' => $request->status
+            'status' => $request->status,
+            'posisi' => $request->posisi
         ]);
         return redirect()->route('adds.index')->with('message', 'Berhasil ditambahkan');
     }
@@ -77,7 +78,8 @@ class AddsController extends Controller
     {
         Adds::where('id', $id)->update([
             'script' => $request->script,
-            'status' => $request->status
+            'status' => $request->status,
+            'posisi' => $request->posisi
         ]);
         return redirect()->route('adds.index')->with('message', 'Berhasil diubah');
     }
