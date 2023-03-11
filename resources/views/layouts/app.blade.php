@@ -25,6 +25,9 @@
             display: none;
         }
     </style>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     @stack('addon-css')
 </head>
 
@@ -54,7 +57,39 @@
         $('#datatable').DataTable();
     </script>
     @stack('addon-script')
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 
+    <script>
+        $(document).ready(function() {
+            var pusher = new Pusher('1b5308696e8cfcc359c2', {
+                cluster: 'ap1'
+            });
+
+            var channel = pusher.subscribe('my-channel');
+            channel.bind('my-event', function(data) {
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-bottom-right",
+                    onclick: function() {
+                        window.location.href = window.location.origin + '/manga/' + data.mangaId;
+                    }
+                }
+                toastr.success(data.comment, data.name);
+            });
+        });
+    </script>
+    {{-- <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-bottom-right",
+            onclick: function() {
+                window.location.href = window.location.origin + '/manga/' + 'dwdww';
+            }
+        }
+        toastr.success('2322', 'hahah');
+    </script> --}}
 </body>
 
 </html>
