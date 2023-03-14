@@ -4,11 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SEOController;
 use App\Http\Controllers\AddsController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\RilisanTerbaru;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MangaController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PopulerController;
 use App\Http\Controllers\MangajobController;
 use App\Http\Controllers\TrendingController;
@@ -17,13 +19,12 @@ use App\Http\Controllers\RecommendController;
 use App\Http\Controllers\SettingWebController;
 use App\Http\Controllers\ThemeColorController;
 use App\Http\Controllers\BlacklistMangaController;
-use App\Http\Controllers\PageController;
 
 Route::get('/', [AuthController::class, 'index'])->name('login');
 Route::post('authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/config-cache', function(){
+Route::get('/config-cache', function () {
     \Artisan::call('config:cache');
 });
 
@@ -83,4 +84,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('manga-populer', PopulerController::class);
     Route::put('update-title-mv/{id}', [PopulerController::class, 'update_title'])->name('update-title-mv');
+
+    Route::get('comment', [CommentController::class, 'index'])->name('comment.index');
 });

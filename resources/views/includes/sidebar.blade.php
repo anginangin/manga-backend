@@ -154,6 +154,14 @@
                         <span class="pcoded-mtext">Blacklist Manga</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('comment.index') }}" class="nav-link ">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-file-text"></i>
+                        </span>
+                        <span class="pcoded-mtext">List Comment</span>
+                    </a>
+                </li>
                 <li class="nav-item pcoded-menu-caption">
                     <label>User</label>
                 </li>
