@@ -86,4 +86,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('update-title-mv/{id}', [PopulerController::class, 'update_title'])->name('update-title-mv');
 
     Route::get('comment', [CommentController::class, 'index'])->name('comment.index');
+    Route::post('comment/reply/{comment_id}/{manga_id}', [CommentController::class, 'reply'])->name('comment.reply');
+    Route::get('comment/delete/{comment_id}', [CommentController::class, 'delete'])->name('comment.delete');
 });
