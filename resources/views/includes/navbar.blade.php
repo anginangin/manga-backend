@@ -24,14 +24,14 @@
                             <img src="/assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
                             <span>{{ Auth::user()->name }}</span>
                         </div>
-                        <ul class="pro-body">
+                        {{-- <ul class="pro-body">
                             <li><a href="user-profile.html" class="dropdown-item"><i class="feather icon-user"></i>
                                     Profile</a></li>
                             <li><a href="email_inbox.html" class="dropdown-item"><i class="feather icon-mail"></i>
                                     My Messages</a></li>
                             <li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i>
                                     Lock Screen</a></li>
-                        </ul>
+                        </ul> --}}
                         <form action="{{ route('logout') }}" method="post">
                             @csrf
                             <button type="submit" class="btn btn-danger btn-block" title="Logout">
