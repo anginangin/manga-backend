@@ -24,13 +24,15 @@ class SEOController extends Controller
         ]);
         return redirect()->route('seo-artikel')->with('message', 'Berhasil disimpan!');
     }
-    
+
     public function edit($id){
+        $this->authorize('seo_view');
         $seo = SEO::findOrFail($id);
         return view('pages.seo.edit', compact('seo'));
     }
-    
+
     public function update(Request $request, $id){
+        $this->authorize('seo_update');
         $seo = SEO::find($id);
         $seo->title = $request->title;
         $seo->meta_tag = $request->meta_tag;

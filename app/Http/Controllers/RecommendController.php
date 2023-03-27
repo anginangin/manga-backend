@@ -16,6 +16,7 @@ class RecommendController extends Controller
      */
     public function index()
     {
+        $this->authorize('slider_rekomendasi_view');
         $recommends = Recommend::with('manga')->orderBy('urutan')->get();
         $title = Title::select('id', 'rekomendasi', 'is_rekomendasi')->first();
         $manga = Manga::all();
@@ -40,6 +41,7 @@ class RecommendController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('slider_rekomendasi_create');
         if (Recommend::where('urutan', $request->urutan)->orWhere('manga_id', $request->manga_id)->exists()) {
             return redirect()->back()->with('error', 'Manga/Urutan sudah didaftarkan.');
         }
@@ -78,6 +80,7 @@ class RecommendController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('slider_rekomendasi_update');
         if (Recommend::where('urutan', $request->urutan)->orWhere('manga_id', $request->manga_id)->exists()) {
             return redirect()->back()->with('error', 'Manga/Urutan sudah didaftarkan.');
         }
@@ -95,12 +98,14 @@ class RecommendController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('slider_rekomendasi_delete');
         Recommend::where('id', $id)->delete();
         return redirect()->back()->with('message', 'Berhasil dihapus');
     }
 
     public function update_title(Request $request, $id)
     {
+        $this->authorize('slider_rekomendasi_update');
         Title::where('id', $id)->update([
             'rekomendasi' => $request->judul,
             'is_rekomendasi' => $request->is_rekomendasi

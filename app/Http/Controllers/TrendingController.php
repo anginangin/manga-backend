@@ -16,6 +16,7 @@ class TrendingController extends Controller
      */
     public function index()
     {
+        $this->authorize('slider_most_view_view');
         $trendings = Trending::with('manga')->orderBy('urutan')->get();
         $title = Title::select('id', 'slider_trending','is_most_view')->first();
         $manga = Manga::all();
@@ -40,6 +41,7 @@ class TrendingController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('slider_most_view_create');
         if (Trending::where('urutan', $request->urutan)->orWhere('manga_id', $request->manga_id)->exists()) {
             return redirect()->back()->with('error', 'Manga/Urutan sudah didaftarkan.');
         }
@@ -78,6 +80,7 @@ class TrendingController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('slider_most_view_update');
         if (Trending::where('urutan', $request->urutan)->orWhere('manga_id', $request->manga_id)->exists()) {
             return redirect()->back()->with('error', 'Manga/Urutan sudah didaftarkan.');
         }
@@ -95,12 +98,14 @@ class TrendingController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('slider_most_view_delete');
         Trending::where('id', $id)->delete();
         return redirect()->back()->with('message', 'Berhasil dihapus');
     }
 
     public function update_title(Request $request, $id)
     {
+        $this->authorize('slider_most_view_update');
         Title::where('id', $id)->update([
             'slider_trending' => $request->judul,
             'is_most_view' => $request->is_most_view,

@@ -15,6 +15,7 @@ class ThemeColorController extends Controller
      */
     public function index()
     {
+        $this->authorize('warna_tema_view');
         $themeColor = ThemeColor::all();
         return view('pages.theme_color.index', compact('themeColor'));
     }
@@ -37,6 +38,7 @@ class ThemeColorController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('warna_tema_create');
         ThemeColor::create(['theme_name'    => $request->theme_name,
             'primary_color' => $request->primary_color,
             'secondary_color' => $request->secondary_color,
@@ -44,7 +46,7 @@ class ThemeColorController extends Controller
             'secondary_base_color' => $request->secondary_base_color,
             'tertiary_base_color' => $request->tertiary_base_color,
             'button_color' => $request->button_color,
-            'text_color' => $request->text_color 
+            'text_color' => $request->text_color
         ]);
         return redirect()->route('theme-color.index')->with('message', 'Berhasil dibuat!');
     }
@@ -68,6 +70,7 @@ class ThemeColorController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('warna_tema_update');
         $color = ThemeColor::findOrFail($id);
         return view('pages.theme_color.edit', compact('color'));
     }
@@ -81,6 +84,7 @@ class ThemeColorController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('warna_tema_update');
         ThemeColor::where('id', $id)->update([
             'theme_name'    => $request->theme_name,
             'primary_color' => $request->primary_color,
@@ -89,7 +93,7 @@ class ThemeColorController extends Controller
             'secondary_base_color' => $request->secondary_base_color,
             'tertiary_base_color' => $request->tertiary_base_color,
             'button_color' => $request->button_color,
-            'text_color' => $request->text_color 
+            'text_color' => $request->text_color
         ]);
         return redirect()->route('theme-color.index')->with('message', 'Berhasil diubah!');
     }
@@ -102,11 +106,13 @@ class ThemeColorController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('warna_tema_delete');
         ThemeColor::destroy($id);
         return redirect()->route('theme-color.index')->with('message', 'Berhasil dihapus');
     }
 
     public function updateTheme(Request $request){
+        $this->authorize('warna_tema_update');
         Web::where('id', 1)->update(['theme_id' => $request->theme_id]);
         return redirect()->back()->with('message', 'Berhasil ganti tema!');
     }

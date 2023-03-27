@@ -16,6 +16,7 @@ class SliderController extends Controller
      */
     public function index()
     {
+        $this->authorize('slider_most_rating_view');
         $slider = Slider::with('manga')->orderBy('urutan')->get();
         $title = Title::select('id', 'atas_rilisan_terbaru', 'is_most_rating')->first();
         $manga = Manga::all();
@@ -40,6 +41,7 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('slider_most_rating_create');
         if (Slider::where('urutan', $request->urutan)->orWhere('manga_id', $request->manga_id)->exists()) {
             return redirect()->route('sliders.index')->with('error', 'Manga/Urutan sudah didaftarkan.');
         }
@@ -78,6 +80,7 @@ class SliderController extends Controller
      */
     public function update(Request $request, Slider $slider)
     {
+        $this->authorize('slider_most_rating_update');
         if (Slider::where('urutan', $request->urutan)->orWhere('manga_id', $request->manga_id)->exists()) {
             return redirect()->route('sliders.index')->with('error', 'Urutan sudah didaftarkan.');
         }
@@ -95,12 +98,14 @@ class SliderController extends Controller
      */
     public function destroy(Slider $slider)
     {
+        $this->authorize('slider_most_rating_delete');
         $slider->delete();
         return redirect()->route('sliders.index')->with('message', 'Berhasil dihapus');
     }
 
     public function update_title(Request $request, $id)
     {
+        $this->authorize('slider_most_rating_update');
         Title::where('id', $id)->update([
             'atas_rilisan_terbaru' => $request->judul,
             'is_most_rating' => $request->is_most_rating

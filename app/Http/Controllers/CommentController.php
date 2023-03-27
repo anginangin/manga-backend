@@ -10,12 +10,14 @@ class CommentController extends Controller
 {
     public function index()
     {
+        $this->authorize('list_comment_view');
         $comments = Comment::orderBy('created_at', 'DESC')->get();
         return view('pages.comment.index', compact('comments'));
     }
 
     public function reply(Request $request, $commentId, $mangaId)
     {
+        $this->authorize('list_comment_reply');
         $comment = $request->comment;
 
         $data = new Comment();
@@ -35,6 +37,7 @@ class CommentController extends Controller
 
     public function delete($commentId)
     {
+        $this->authorize('list_comment_delete');
         $comment = Comment::findOrFail($commentId);
 
         if ($comment->delete()) {

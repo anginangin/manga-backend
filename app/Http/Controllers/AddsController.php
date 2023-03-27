@@ -14,6 +14,7 @@ class AddsController extends Controller
      */
     public function index()
     {
+        $this->authorize('iklan_view');
         $adds = Adds::latest('id')->get();
         return view('pages.adds.index', compact('adds'));
     }
@@ -25,6 +26,7 @@ class AddsController extends Controller
      */
     public function create()
     {
+        $this->authorize('iklan_create');
         return view('pages.adds.create');
     }
 
@@ -36,6 +38,7 @@ class AddsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('iklan_create');
         Adds::create([
             'script' => $request->script,
             'status' => $request->status,
@@ -63,6 +66,7 @@ class AddsController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('iklan_update');
         $adds = Adds::findOrFail($id);
         return view('pages.adds.edit', compact('adds'));
     }
@@ -76,6 +80,7 @@ class AddsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('iklan_update');
         Adds::where('id', $id)->update([
             'script' => $request->script,
             'status' => $request->status,
@@ -92,6 +97,7 @@ class AddsController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('iklan_delete');
         Adds::destroy($id);
         return redirect()->route('adds.index')->with('message', 'Berhasil dihapus');
     }

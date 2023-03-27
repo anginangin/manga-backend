@@ -18,6 +18,7 @@ class MangaController extends Controller
      */
     public function index()
     {
+        $this->authorize('list_manga_view');
         $manga = Manga::where('is_blacklist', 0)->orderBy('id', 'desc')->get();
         return view('pages.manga.index',compact('manga'));
     }
@@ -51,6 +52,7 @@ class MangaController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('list_manga_view');
         $detail = Manga::with('chapters')->where('slug',$id)->first();
         $rating = Rating::where('manga_id',$detail['id'])->first();
         $comment = Comment::where('commentable_id', $detail['id'])->get();
@@ -79,6 +81,7 @@ class MangaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('list_manga_update');
         $key = $request->key;
         $value = $request->value;
         $data = [];
@@ -87,7 +90,7 @@ class MangaController extends Controller
               "key" => $key[$i],
               "value" => $value[$i]
             ];
-        } 
+        }
         Manga::where('id', $id)->update(['information' => $data]);
         return redirect()->back()->with('message', 'Berhasil diubah!');
     }
@@ -104,11 +107,13 @@ class MangaController extends Controller
     }
 
     public function delete_chapter($id){
+        $this->authorize('list_manga_delete');
         Chapter::destroy($id);
         return redirect()->back()->with('message', 'Berhasil dihapus!');
     }
 
     public function blacklist($id){
+        $this->authorize('list_manga_delete');
         Manga::where('id', $id)->update(['is_blacklist' => 1]);
         return redirect()->back()->with('message', 'Berhasil dihapus!');
     }

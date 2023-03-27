@@ -14,17 +14,20 @@ class MangajobController extends Controller
 {
     public function index()
     {
+        $this->authorize('manga_job_view');
         $data = MangaJob::latest()->get();
         return view('pages.mangajob.index', compact('data'));
     }
 
     public function create()
     {
+        $this->authorize('manga_job_create');
         return view('pages.mangajob.create');
     }
 
     public function checkScraping(Request $request)
     {
+        $this->authorize('manga_job_create');
         $output = '';
         $urlManga = [];
         $id = Manga::select('id')->orderBy('id', 'desc')->first();
@@ -40,7 +43,7 @@ class MangajobController extends Controller
                 $slug[$key]         = explode("/", $url[$key]);
 
                 if (Manga::where('slug', '=', $slug[$key][4])->exists()) {
-                    $output .= '    
+                    $output .= '
                         <tr>
                             <td>' . $url[$key] . '</td>
                             <td>
@@ -52,7 +55,7 @@ class MangajobController extends Controller
                         </tr>';
                     $informations = null;
                 } else {
-                    $output .= '    
+                    $output .= '
                         <tr>
                             <td>' . $url[$key] . '</td>
                             <td>
@@ -75,7 +78,7 @@ class MangajobController extends Controller
 
                         $check_host[$key]   = $slug[$key][0] . '//' . $slug[$key][2];
                         $node[$key]         = $client->request('GET', $url[$key]);
-    
+
                         if ($check_host[$key] == config('constant.url.komikstation')) {
                             $this->information[$key]['id']          = $data_id + $key + 1;
                             $this->information[$key]['url']         = $url[$key];
@@ -150,9 +153,10 @@ class MangajobController extends Controller
 
     public function store($informations, $output, $urlManga)
     {
+        $this->authorize('manga_job_create');
         $mangas     = [];
         $chapter    = [];
-    
+
         foreach ($informations as $value) {
             $alphabet   = mb_substr($value['title'], 0, 1);
             $isNumeric  = preg_match('/^[0-9]+$/', mb_substr($value['title'], 0, 1));
@@ -188,7 +192,7 @@ class MangajobController extends Controller
         DB::table('mangajob')->insertOrIgnore($urlManga);
         DB::table('manga')->insertOrIgnore($mangas);
         DB::table('manga_chapter')->insertOrIgnore($chapter);
-        
+
         return response()->json([
             'success' => true,
             'message' => 'Berhasil!',
@@ -226,6 +230,7 @@ class MangajobController extends Controller
 
     public function delete($id)
     {
+        $this->authorize('manga_job_delete');
         $chapter = Chapter::where('manga_id', $id);
         $chapter->delete();
 

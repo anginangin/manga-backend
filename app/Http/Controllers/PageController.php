@@ -15,6 +15,7 @@ class PageController extends Controller
      */
     public function index()
     {
+        $this->authorize('pages_view');
         $pages = Page::all();
         return view('pages.page.index', compact('pages'));
     }
@@ -26,6 +27,7 @@ class PageController extends Controller
      */
     public function create()
     {
+        $this->authorize('pages_create');
         return view('pages.page.create');
     }
 
@@ -37,6 +39,7 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('pages_create');
         $request->validate([
             'title' => 'unique:pages,title',
         ]);
@@ -67,6 +70,7 @@ class PageController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('pages_update');
         $page = Page::findOrFail($id);
 
         return view('pages.page.edit', compact('page'));
@@ -81,6 +85,7 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('pages_update');
         $request->validate(
             [
                 'title' => 'unique:pages,title,' . $id,
@@ -105,6 +110,7 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('pages_delete');
         $page = Page::findOrFail($id);
 
         if ($page->delete()) {

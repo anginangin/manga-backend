@@ -22,17 +22,18 @@ class SettingWebController extends Controller
 
     public function store(Request $request)
     {
-        
     }
 
     public function edit($id)
     {
+        $this->authorize('logo_view');
         $web = Web::findOrFail($id);
         return view('pages.setting_web.edit', compact('web'));
     }
 
     public function update(Request $request, $id)
     {
+        $this->authorize('logo_update');
         if ($request->file('icon')) {
             $icon = $request->file('icon');
             $nama_icon = time() . "_" . $icon->getClientOriginalName();

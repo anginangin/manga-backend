@@ -37,6 +37,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('administrator/store', [UserController::class, 'store'])->name('store-administrator');
     Route::get('administrator/edit/{id}', [UserController::class, 'edit'])->name('edit-administrator');
     Route::put('administrator/update/{id}', [UserController::class, 'update'])->name('update-administrator');
+    Route::get('administrator/permission', [UserController::class, 'permission'])->name('permission');
+    Route::put('administrator/permission/update/', [UserController::class, 'permissionUpdate'])->name('permission.update');
+    Route::get('administrator/delete/{id}', [UserController::class, 'delete'])->name('delete-administrator');
 
     Route::resource('manga', MangaController::class);
     Route::get('manga/chapter/delete/{id}', [MangaController::class, 'delete_chapter'])->name('delete_chapter');

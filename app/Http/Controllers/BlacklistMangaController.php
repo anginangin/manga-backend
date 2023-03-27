@@ -14,6 +14,7 @@ class BlacklistMangaController extends Controller
      */
     public function index()
     {
+        $this->authorize('blacklist_manga_view');
         $data = Manga::where('is_blacklist', 1)->orderBy('updated_at', 'desc')->get();
         return view('pages.manga_blacklist.index', compact('data'));
     }
@@ -85,6 +86,7 @@ class BlacklistMangaController extends Controller
     }
 
     public function restore($id){
+        $this->authorize('blacklist_manga_restore');
         Manga::where('id', $id)->update(['is_blacklist' => 0]);
         return redirect()->back()->with('message', 'Berhasil direstore!');
     }

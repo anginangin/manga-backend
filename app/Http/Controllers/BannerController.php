@@ -14,6 +14,7 @@ class BannerController extends Controller
      */
     public function index()
     {
+        $this->authorize('banner_view');
         $banner = Banner::latest('id')->get();
         return view('pages.banner.index', compact('banner'));
     }
@@ -25,6 +26,7 @@ class BannerController extends Controller
      */
     public function create()
     {
+        $this->authorize('banner_create');
         return view('pages.banner.create');
     }
 
@@ -36,11 +38,12 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('banner_create');
         $gambar = $request->file('gambar');
         $nama_gambar = time() . "_" . $gambar->getClientOriginalName();
         $tujuan_upload = 'banner';
         $gambar->move($tujuan_upload, $nama_gambar);
-        
+
         Banner::create([
             'posisi' => $request->posisi,
             'gambar' => $nama_gambar,
@@ -70,6 +73,7 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('banner_update');
         $banner = Banner::findOrFail($id);
         return view('pages.banner.edit', compact('banner'));
     }
@@ -83,6 +87,7 @@ class BannerController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('banner_update');
         if ($request->file('gambar')) {
             $gambar = $request->file('gambar');
             $nama_gambar = time() . "_" . $gambar->getClientOriginalName();
@@ -116,6 +121,7 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('banner_delete');
         Banner::destroy($id);
         return redirect()->route('banners.index')->with('message', 'Berhasil dihapus');
     }

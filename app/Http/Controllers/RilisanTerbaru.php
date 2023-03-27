@@ -15,6 +15,7 @@ class RilisanTerbaru extends Controller
      */
     public function index()
     {
+        $this->authorize('rilisan_terbaru_view');
         $mangas = Manga::where(['domain' => 'https://kiryuu.id', 'is_blacklist' => 0])->take(30)->orderBy('id','desc')->get();
         $title = Title::select('id','rilisan_terbaru')->first();
         return view('pages.homepage_fe.rilisan_terbaru.index', compact('mangas', 'title'));
@@ -72,6 +73,7 @@ class RilisanTerbaru extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('rilisan_terbaru_update');
         Title::where('id', $id)->update([
             'rilisan_terbaru' => $request->judul
         ]);

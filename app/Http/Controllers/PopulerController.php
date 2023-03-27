@@ -14,6 +14,7 @@ class PopulerController extends Controller
      */
     public function index()
     {
+        $this->authorize('manga_popular_view');
         $title = Title::select('id', 'most_view')->first();
         return view('pages.homepage_fe.manga_populer.index', compact('title'));
     }
@@ -70,7 +71,7 @@ class PopulerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
     }
 
     /**
@@ -86,6 +87,7 @@ class PopulerController extends Controller
 
     public function update_title(Request $request, $id)
     {
+        $this->authorize('manga_popular_update');
         Title::where('id', $id)->update([
             'most_view' => $request->judul
         ]);
