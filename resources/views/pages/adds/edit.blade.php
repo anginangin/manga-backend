@@ -14,6 +14,12 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
+                                <label class="floating-label font-weight-bold">Name</label>
+                                <input type="text" class="form-control form-control-sm" name="name" value="{{ $data->name }}">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
                                 <label class="floating-label font-weight-bold">Script Iklan</label>
                                 <textarea name="script" class="form-control form-control-sm" cols="30" rows="10">{{ $data->script }}</textarea>
                             </div>

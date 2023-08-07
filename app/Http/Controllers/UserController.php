@@ -39,7 +39,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'role' => 2
         ]);
-        $user->assignRole('Administrator');
+        $user->assignRole($request->roles);
         return redirect()->route('administrator')->with('message', 'Berhasil disimpan!');
     }
 
@@ -57,7 +57,9 @@ class UserController extends Controller
         $administrator->name = $request->name;
         $administrator->email = $request->email;
         $administrator->password = Hash::make($request->password);
+        $administrator->syncRoles($request->roles);
         $administrator->save();
+
         return redirect()->route('administrator')->with('message', 'Berhasil update!');
     }
 

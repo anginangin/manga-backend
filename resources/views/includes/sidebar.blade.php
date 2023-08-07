@@ -194,7 +194,7 @@
                         </li>
                     @endcan
                 @endcanany
-                @canany(['administrator_view', 'member_view'])
+                @canany(['administrator_view', 'member_view','roles_view'])
                     <li class="nav-item pcoded-menu-caption">
                         <label>User</label>
                     </li>
@@ -215,6 +215,16 @@
                                     <i class="feather icon-users"></i>
                                 </span>
                                 <span class="pcoded-mtext">Member</span>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('roles_view')
+                        <li class="nav-item">
+                            <a href="{{ route('roles.index') }}" class="nav-link ">
+                                <span class="pcoded-micon">
+                                    <i class="feather icon-users"></i>
+                                </span>
+                                <span class="pcoded-mtext">Roles</span>
                             </a>
                         </li>
                     @endcan

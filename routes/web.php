@@ -6,8 +6,10 @@ use App\Http\Controllers\AddsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RilisanTerbaru;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MangaController;
+use App\Http\Controllers\RolesController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\CommentController;
@@ -91,4 +93,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('comment', [CommentController::class, 'index'])->name('comment.index');
     Route::post('comment/reply/{comment_id}/{manga_id}', [CommentController::class, 'reply'])->name('comment.reply');
     Route::get('comment/delete/{comment_id}', [CommentController::class, 'delete'])->name('comment.delete');
+
+    Route::resource('roles', RolesController::class);
+
 });

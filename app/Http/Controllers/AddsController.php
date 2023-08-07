@@ -40,6 +40,7 @@ class AddsController extends Controller
     {
         $this->authorize('iklan_create');
         Adds::create([
+            'name' => $request->name,
             'script' => $request->script,
             'status' => $request->status,
             'posisi' => $request->posisi
@@ -82,6 +83,7 @@ class AddsController extends Controller
     {
         $this->authorize('iklan_update');
         Adds::where('id', $id)->update([
+            'name' => $request->name,
             'script' => $request->script,
             'status' => $request->status,
             'posisi' => $request->posisi

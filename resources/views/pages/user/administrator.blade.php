@@ -23,7 +23,7 @@
                     <div class="card">
                         <div class="card-header">
                             <a href="{{ route('add-administrator') }}" class="btn btn-primary btn-sm">+ Admin Baru</a>
-                            <a href="{{ route('permission') }}" class="btn btn-warning btn-sm"> Permissions</a>
+                            {{-- <a href="{{ route('permission') }}" class="btn btn-warning btn-sm"> Permissions</a> --}}
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -33,6 +33,7 @@
                                             <th>#</th>
                                             <th>Nama</th>
                                             <th>Email</th>
+                                            <th>Roles</th>
                                             <th>Tanggal Terdaftar</th>
                                             <th>Terakhir Login</th>
                                             <th>Action</th>
@@ -49,12 +50,18 @@
                                                     {{ $data->email }}
                                                 </td>
                                                 <td>
+                                                    {{ $data->roles()->pluck('name')->implode(' ') }}
+                                                </td>
+                                                <td>
                                                     {{ date('d-M-Y H:i:s', strtotime($data->created_at)) }}
                                                 </td>
                                                 <td>
                                                     {{ date('d-M-Y H:i:s', strtotime($data->updated_at)) }}
                                                 </td>
                                                 <td>
+                                                    <a href="{{ route('edit-administrator', $data->id) }}"
+                                                        class="btn btn-info btn-sm"
+                                                       >Edit</a>
                                                     <a href="{{ route('delete-administrator', $data->id) }}"
                                                         class="btn btn-danger btn-sm"
                                                         onclick="return confirm('Yakin ?')">Hapus</a>

@@ -17,6 +17,12 @@ Iklan (Ads)
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
+                                        <label class="floating-label font-weight-bold">Name</label>
+                                        <input type="text" class="form-control form-control-sm" name="name">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
                                         <label class="floating-label font-weight-bold">Script Iklan</label>
                                         <textarea name="script" class="form-control form-control-sm" cols="30" rows="6"></textarea>
                                     </div>
@@ -65,6 +71,7 @@ Iklan (Ads)
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Name</th>
                                         <th>Iklan (Ads)</th>
                                         <th>Posisi</th>
                                         <th class="text-center">Status</th>
@@ -75,6 +82,7 @@ Iklan (Ads)
                                     @foreach ($adds as $data)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $data->name ?? '-' }}</td>
                                         <td>
                                             {{ Str::limit($data->script, 50) }}
                                         </td>

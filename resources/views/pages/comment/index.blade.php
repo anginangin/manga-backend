@@ -46,6 +46,7 @@
                                                     {{ $item->comment }}
                                                 </td>
                                                 <td>
+                                                    <a href="http://mangapaws.com/manga/{{ App\Models\Manga::where('id', $item->commentable_id)->first()->slug ?? '' }} "target="_blank" class="btn badge btn-info">Link Manga</a>
                                                     <a href="#" id="reply" data-toggle="modal"
                                                         data-target="#modal-edit" data-id="{{ $item->id }}"
                                                         data-manga_id="{{ $item->commentable_id }}"

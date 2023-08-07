@@ -32,6 +32,21 @@ Edit Admin
                                         <input type="password" name="password" class="form-control form-control-sm">
                                     </div>
                                 </div>
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="floating-label font-weight-bold">Roles</label>
+                                        <select name="roles" id="roles" class="form-control form-control-sm">
+                                            <option value="">Pilih Roles</option>
+                                            @foreach (App\Models\Role::all()->pluck('name', 'id') as $id => $roles)
+                                            <option value="{{ $id }}"
+                                                {{ isset($administrator) ? ($administrator->roles->contains($id) ? 'selected' : null) : null }}>{{ $roles }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
                             </div>
                             <button type="submit" class="btn btn-primary btn-block" id="store">Submit</button>
                         </form>

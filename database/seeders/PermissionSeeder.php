@@ -452,6 +452,38 @@ class PermissionSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'id' => 54,
+                'name' => 'roles_view',
+                'display_name' => 'Roles View',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 55,
+                'name' => 'roles_create',
+                'display_name' => 'Roles Create',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 56,
+                'name' => 'roles_update',
+                'display_name' => 'Roles Update',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 57,
+                'name' => 'roles_delete',
+                'display_name' => 'Roles Delete',
+                'guard_name' => 'web',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
         \DB::table('permissions')->delete();
         \DB::table('permissions')->insert($data);
