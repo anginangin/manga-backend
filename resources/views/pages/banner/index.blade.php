@@ -15,6 +15,12 @@ Banner
                         <form action="{{ route('banners.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
+                                 <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="floating-label font-weight-bold">Name</label>
+                                        <input type="text" class="form-control form-control-sm" name="name">
+                                    </div>
+                                </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label class="floating-label font-weight-bold">Posisi</label>
@@ -81,6 +87,7 @@ Banner
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Name</th>
                                         <th>Posisi</th>
                                         <th>Gambar</th>
                                         <th>Status</th>
@@ -91,6 +98,7 @@ Banner
                                     @foreach ($banner as $data)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $data->name ?? '-' }}</td>
                                         <td>{{ str_replace('_',' ',ucwords($data->posisi)) }}</td>
                                         <td>
                                             <img src="/banner/{{ $data->gambar }}" class="img-fluid" style="max-height: 100px">
@@ -121,6 +129,12 @@ Banner
                                                             @method('PUT')
                                                             @csrf
                                                             <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-group">
+                                                                        <label class="floating-label font-weight-bold">Name</label>
+                                                                        <input type="text" class="form-control form-control-sm" name="name" value="{{ $data->name }}">
+                                                                    </div>
+                                                                </div>
                                                                 <div class="col-sm-12">
                                                                     <div class="form-group">
                                                                         <label class="floating-label font-weight-bold">Posisi</label>

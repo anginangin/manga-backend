@@ -45,6 +45,7 @@ class BannerController extends Controller
         $gambar->move($tujuan_upload, $nama_gambar);
 
         Banner::create([
+            'name' => $request->name,
             'posisi' => $request->posisi,
             'gambar' => $nama_gambar,
             'link' => $request->link,
@@ -104,6 +105,7 @@ class BannerController extends Controller
         }
 
         Banner::where('id', $id)->update([
+            'name' => $request->name,
             'posisi' => $request->posisi,
             'gambar' => $nama_gambar,
             'link' => $request->link,
